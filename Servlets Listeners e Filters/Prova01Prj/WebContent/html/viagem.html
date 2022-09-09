@@ -1,0 +1,32 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Viagem</title>
+</head>
+<body>
+
+  <h1>Entrada de dados</h1>
+  
+  <form action="../ProvaServlet" method="post">
+    Diatância (km): <input type="text" name="distancia"/>
+    
+    <br>Velocidade média (km/h): <input type="text" name="velocidade"/>
+    
+    <p>Calcular consumo? <input type="checkbox" name="calcular"/>
+    
+    <br>Consumo médio (km/l): <input type="text" name="consumo"/>
+
+    <br>Tipo de combustível:
+    <select name="combustivel">
+      <option value="G">Gasolina</option>
+      <option value="A">Álcool</option>
+      <option value="D">Diesel</option>
+    </select>
+    
+    <p><input type="submit"/>
+     
+  </form>
+
+</body>
+</html>
