@@ -1,0 +1,7 @@
+Para evitar a duplicação do código da tela a ser exibida para o usuário, 
+faça um JSP que seja responsável pela construção dessa tela. Este JSP não
+deverá ser acessado diretamente pelo usuário (coloque-o dentro da pasta
+WEB-INF), e a mensagem de resposta a ser exibida deve ser um atributo
+da requisição. Os demais componentes (servlets e filtros) que precisarem
+utilizar essa dela devem gravar o atributo de requisição e fazer um
+redirecionamento (com forward) para o JSP.
