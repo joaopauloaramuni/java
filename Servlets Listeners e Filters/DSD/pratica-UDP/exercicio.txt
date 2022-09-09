@@ -1,0 +1,16 @@
+Construir uma classe NameServer que implemente um servidor de nomes simplificado. Esta classe deve trabalhar
+com o protocolo UDP e seu objetivo é mapear nomes lógicos para pares hostname/port.
+
+Os clientes devem enviar mensagens de tipo String no seguinte formato:
+
+ - insert <nome lógico> <hostname> <port>: insere as informações sobre o <nome lógico> informado nas tabelas
+   do servidor. Retorna "1" se for bem sucedido, "0" caso contrário.
+
+ - search <nome lógico>: pesquisa as informações sobre o <nome lógico> solicitado nas tabelas do servidor.
+   Devolve as informações no seguinte formato: "<port> <hostname" (ou "-1" se a busca falhar).
+
+A estrutura interna do servidor para guardar as informações deve ser encapsulada em uma classe auxiliar
+denominada NameTable. O aluno deve selecionar a estrutura mais adequada para o trabalho (vetores, árvores
+binárias, tabelas hash, etc).
+
+Desenvolva também um cliente UDP para enviar solicitações ao servidor.

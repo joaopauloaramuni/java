@@ -1,0 +1,225 @@
+DSD
+
+Processo : Abstração de um programa em execução.
+
+Threads : Tarefas de um mesmo processo que executam concorrentemente,
+compartilhando todos os recursos do processo.
+
+Espera Ocupada: 
+A espera ocupada (busy wait) é uma estratégia de bloqueio de threads. Pode ser considerada
+como uma solução de software para impedir que threads acessem suas respectivas sessões críticas em determinados momentos.
+Em algoritmos de espera ocupada, threads ficam bloqueadas em um laço (loop), até que a condição de entrada na sessão crítica
+seja estabelecida.
+O principal problema da espera ocupada, está relacionado à pouca eficiência de sua implementação. A espera ocupada consome
+recursos de processamento enquanto está aguardando alguma thread terminar de executar sua sessão crítica.
+
+Condição de corrida: Condição que ocorre quando duas ou mais threads acessam
+estado mutável compartilhado simultâneamente.
+
+Condição de Corrida: Erro.
+O código multithread não deve conter condição de corrida.
+
+Exclusão mútua é a solução para condição de corrida.
+Cada thread deve acessar individualmente (atomicidade) sua sessão crítica enquanto outras threads aguardam.
+
+Execução Atômica é uma execução indivisível.
+A exclusão mútua garante que todas as execuções sejam atômicas, portanto não haverá condição de corrida.
+Regra da Atomicidade: Operações que acessam estado mutável compartilhado devem ser atômicas.
+
+Threads realizando leitura não apresentam problemas de condição de conrrida.
+Apenas alterações apresentam problemas de sincronismo.
+
+Uma thread que quer executar sua sessão crítica deverá lockar a mesma.
+
+A interface Lock bloqueia e libera a sessão crítica para que duas ou mais threads não acessem o mesmo dado 
+ao mesmo tempo.
+
+RequestCS -> Método p/ bloquear a sessão crítica.
+ReleaseCS -> Método p/ liberar a sessão crítica.
+
+Primeira Solução para Condição de Corrida:
+
+Algoritmo da Porta: Flag para verificar se alguma thread está ou não executando sua região crítica.
+Flag para controlar o acesso à sessão crítica. Apenas uma thread poderá executar a região crítica por vez.
+Espera Ocupada (Busy Wait) (laço do while)
+Consome recursos de processamento enquanto está aguardando alguma thread terminar de executar sua sessão crítica.
+Essa implementação não é eficiente.
+
+Demonstração do Algoritmo de Lock que não fornece exclusão mútua.
+Possui condição de corrida.
+
+Demonstração:
+
+T0 LÊ OPENDOOR = TRUE E SAI DO LAÇO.
+T1 LÊ OPENDOOR = TRUE E SAI DO LAÇO.
+
+T0 LÊ OPENDOOR = FALSE E ENTRA NA SESSÃO CRÍTICA.
+T1 LÊ OPENDOOR = FALSE E ENTRA NA SESSÃO CRÍTICA.
+
+Ambos acessam a sessão crítica ao mesmo tempo.
+
+Critérios de Correção de um algoritmo de exclusão mútua:
+1) Fornecer exclusão mútua.
+2) Garantir condição de progresso.
+3) Ausência de Inanição
+
+******************** Algoritmo do Cavalheirismo (Incorreto) ******************** 
+
+Pergunta se a thread está executando em sua região crítica.
+Fornece exclusão mútua mas não garante condição de progresso.
+
+Demonstração por Absurdo:
+Suponha-se que o algoritmo não forneça eclusão mútua.
+
+Logo, T0 e T1 estão na sessão crítica simultaneamente. (suposição)
+
+T0 está na CS -> WANTCS[0] == TRUE
+T1 está na CS -> WANTCS[0] == FALSE
+
+Contradição
+
+Apesar de fornecer exclusão mútua, as threads podem não progredir.
+Ambas querem acesso à SC mas não conseguem sair da SC, portanto não
+progridem em determinada situação. 'LiveLock'
+
+
+******************** Algoritmo dos Turnos Alternados (incorreto) ******************** 
+
+1 - Permite exclusão mútua
+2 - Garante condição de progresso
+3 - Há Inanição (Algoritmo Incorreto)
+
+OBS: Inanição: Uma thread quer acesso a sc, mas é impedida de acessar devido a finalização
+ou, intervenção, de outra thread. Se a thread t2 não quer mais acesso a sc, a thread 1
+fica impossibilitada de acessar a sc. Fica faminta.
+
+Se o acesso a sc depende do comportamento de uma thread 1, e essa, em algum momento
+prejudica a entrada da thread t2, então dizemos que há inanição.
+A thread t2 foi inibida pela thread t1 de acessar a sc e por isso, ficou faminta.
+
+Ininição ocorre quando uma thread não pode ficar sem acessar sua sc. Senão ela fica faminta.
+
+******************** Algoritmo de Peterson (correto p/ 2 threads) ******************** 
+
+Algoritmo correto de exclusão mútua mas p/ 2 thread apenas.
+(Cavalheirismo + Turnos Alternados)
+
+PRIMEIRA PROVA
+T0 ESTÁ BLOQUEADA => TURN = 1 E WANTCS[1] == TRUE
+T1 ESTÁ BLOQUEADA => TURN = 0 E WANTCS[0] == TRUE
+
+Para que não haja progresso, isso deve acontecer.
+Porém, não é possível ter uma variável com 2 valores ao mesmo tempo.
+Logo, demonstração provada por contradição.
+O algoritmo possui condição de progresso. (correto)
+
+SEGUNDA PROVA
+T0 ESTÁ BLOQUEADA => TURN = 1 E WANTCS[1] == TRUE
+T1 ESTÁ FORA DA SC => WANTCS[1] == FALSE
+
+Contradição, por isso, é ausente de inanição. (correto)
+A thread consegue acesso a sc mesmo se a outra thread terminar de executar.
+
+TERCEIRA PROVA
+Fornece exclusão mútua? Sim.
+As threads não podem estar ao mesmo tempo em sua sc?
+
+T0 ESTÁ NA CS => WANTCS[1] == FALSE OU TURN == 0
+CASO 1) 
+	WANTCS[1] == FALSE
+	T0 FAZ WANTCS[0] == TRUE
+	T0 FAZ TURN == 1
+	----------------------------------------------
+	T0 LÊ WANTCS[1] == FALSE E ENTRA NA CS.
+	T1 FAZ WANTCS[1] == TRUE
+	T1 FAZ TURN = 0
+	T1 LÊ WANTCS[0] == TRUE E TURN = 0 E BLOQUEIA.
+
+	SEQUÊNCIA CRÍTICA
+
+caso 2)
+	TURN = 0
+	T0 FAZ WANTCS[0] = TRUE (DEPOIS OU ANTES) T1 FAZ WANTCS[1] = TRUE
+	------------------------------------------------------------------
+	T0 FAZ TURN = 1
+	T1 FAZ TURN = 0
+	T0 LÊ TURN = 0 E ENTRA NA CS
+
+	SEQUÊNCIA CRÍTICA
+
+	POR ÚLTIMO T1 LÊ WANTCS[0] == TRUE E TURN = 0 E BLOQUEIA.
+
+----------------------------------------------------------------------------------------------
+
+Exercícíos Cap 2
+
+1) TROCAR A ORDEM DE WANTCS[I] = TRUE;
+		     TURN = J;
+		     O ALGORITMO DE PETERSON DEIXA DE ESTAR CORRETO.
+		     DEMONSTRAR PORQUE ESTÁ ERRADO.
+
+2) ANALISAR AS 3 CONDIÇÕES BÁSICAS PARA VERIFICAR SE UM ALGORITMO MULTITHREAD ESTÁ CORRETO
+NO ALGORITMO DE DEKKER.
+
+3) PETERSON E DEKKER SÓ FUNCIONAM PARA 2 THREADS, MAS PODEM SER ESTENDIDOS (MODIFICADOS PARA 
+ATENDER MAIS THREADS). REALIZAR ADAPTAÇÃO. (LOOPS ANINHADOS) (PROBLEMA COM TURN)
+
+----------------------------------------------------------------------------------------------
+
+PRIMEIRO ALGORITMO CORRETO PARA + DE 2 THREADS
+
+
+******************** Algoritmo de Lamport (da padaria) (correto p/ 2 ou + threads) ********************
+Atende as 3 condições. Implementa BakeryLock
+
+Primeiro algoritmo correto para múltiplas threads.
+
+DOORWAY (PORTAL) 1ºParte
+N -> quantidade de threads
+Tem 2 loops espera ocupada. Busy wait.
+
+Nj < Ni ou (Nj - Ni e j < 1)
+Notação: (Nj, j) < (Ni, i)
+
+A thread i vence a thread j se
+Nj = 0 ou (Ni, i) < (Nj, j)
+[2ºcaso]  [1º caso Vitória legítima]
+
+2º caso; Não está interessada na sessão crítica mas pode ficar.
+	 Se ficar interessada, entra o papel do choosing, que define um bloco
+	 true e false.
+
+Timestamps = senhas
+
+Nesse algoritmo, timestamps podem crescer sem limites.
+No caso de variáveis inteiras, corre o risco de estourar o espaço máximo reservado.
+
+Prova que fornece exclusão mútua:
+Lemas: 1,5,6
+Por contradição:
+
+Suponha-se por um absurdo, que duas threads estejam na sessão crítica.
+(Ni, i) < Nj, j) e (Nj, j) < (Ni, i)
+Isso deve ocorrer para que as threads estejam simultaneamente na sc. 
+Como isso é impossível, então, fornece exclusão mútua.
+
+Provar que permite progresso:
+Lemas 1 e 4
+
+Provar a ausência de inanição
+Lema 3 [prova direta]
+Toda thread T, competindo pelo acesso a SC, terá o menor número de senha.
+
+Exercício: Provar porqué é necessário o choosing.
+Sem o choosing o algoritmo não forneceria exclusão mútua, em determinado momento.
+As duas threads acessariam a sc simultaneamente.
+
+TestAndSetLock
+Fornece Exclusão Mútua.
+Possui inanição em raríssimos momentos.
+
+-------------------------------- ENTREGAR --------------------------------
+Cap 2
+Exercício 2.1, 2.3 e 2.4
+Modificar o algoritmo de Peterson (correto para 2 threads) para aceitar N threads. (CAIU NA PROVA)
+
