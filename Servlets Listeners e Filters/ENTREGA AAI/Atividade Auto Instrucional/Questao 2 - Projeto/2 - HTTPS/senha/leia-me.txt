@@ -1,0 +1,7 @@
+Diretório da pasta senha:
+
+C:\senha
+
+Diretório de leitura do arquivo key.kdb pelo tomcat
+
+C:\senha\key.kdb
