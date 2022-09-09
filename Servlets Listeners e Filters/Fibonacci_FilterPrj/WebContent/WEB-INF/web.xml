@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" id="WebApp_ID" version="2.5">
+  <display-name>Fibonacci_FilterPrj</display-name>
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
+  </welcome-file-list>
+  <servlet>
+    <description></description>
+    <display-name>FibonacciServlet</display-name>
+    <servlet-name>FibonacciServlet</servlet-name>
+    <servlet-class>fibo.FibonacciServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>FibonacciServlet</servlet-name>
+    <url-pattern>/fibonacci</url-pattern>
+  </servlet-mapping>
+  <filter>
+    <display-name>FibonacciFilter</display-name>
+    <filter-name>FibonacciFilter</filter-name>
+    <filter-class>fibo.FibonacciFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>FibonacciFilter</filter-name>
+    <servlet-name>FibonacciServlet</servlet-name>
+  </filter-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ErroServlet</display-name>
+    <servlet-name>ErroServlet</servlet-name>
+    <servlet-class>fibo.ErroServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ErroServlet</servlet-name>
+    <url-pattern>/erro</url-pattern>
+  </servlet-mapping>
+</web-app>
