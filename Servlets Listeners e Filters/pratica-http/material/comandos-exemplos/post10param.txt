@@ -1,0 +1,5 @@
+POST /servlets-examples/servlet/RequestParamExample HTTP/1.0
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 31
+
+firstname=Flavio&lastname=Laper 

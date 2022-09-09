@@ -1,0 +1,5 @@
+GET /servlets-examples/helloworld.html HTTP/1.0
+Accept: text/plain; text/html
+Content-Length: 0
+
+ 
