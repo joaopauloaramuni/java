@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" id="WebApp_ID" version="2.5">
+  <display-name>WebService</display-name>
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
+  </welcome-file-list>
+  <listener>
+    <listener-class>
+                com.sun.xml.ws.transport.http.servlet.WSServletContextListener
+        </listener-class>
+  </listener>
+  <servlet>
+    <servlet-name>cpf</servlet-name>
+    <servlet-class>
+        	com.sun.xml.ws.transport.http.servlet.WSServlet
+        </servlet-class>
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>cpf</servlet-name>
+    <url-pattern>/cpf</url-pattern>
+  </servlet-mapping>
+  <session-config>
+    <session-timeout>120</session-timeout>
+  </session-config>
+    <security-constraint>
+    <web-resource-collection>
+        <web-resource-name>securedapp</web-resource-name>
+        <url-pattern>/*</url-pattern>
+    </web-resource-collection>
+    <user-data-constraint>
+        <transport-guarantee>CONFIDENTIAL</transport-guarantee>
+    </user-data-constraint>
+</security-constraint>
+<env-entry>
+    <env-entry-name>IP_Casa_1</env-entry-name>
+    <env-entry-type>java.lang.String</env-entry-type>
+    <env-entry-value>192.168.0.1</env-entry-value>
+</env-entry>
+<env-entry>
+    <env-entry-name>IP_Casa_2</env-entry-name>
+    <env-entry-type>java.lang.String</env-entry-type>
+    <env-entry-value>192.168.0.2</env-entry-value>
+</env-entry>
+<env-entry>
+    <env-entry-name>IP_Fumec</env-entry-name>
+    <env-entry-type>java.lang.String</env-entry-type>
+    <env-entry-value>172.16.0.1</env-entry-value>
+</env-entry>
+</web-app>

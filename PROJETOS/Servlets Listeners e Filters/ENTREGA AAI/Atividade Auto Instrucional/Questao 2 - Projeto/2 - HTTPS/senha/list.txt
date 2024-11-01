@@ -1,0 +1,69 @@
+
+Tipo de área de armazenamento de chaves: JKS
+Fornecedor da área de armazenamento de chaves: SUN
+
+Sua área de armazenamento de chaves contém 2 entradas
+
+Nome do alias: root
+Data de criação: 20/10/2013
+Tipo de entrada: trustedCertEntry
+
+Proprietário: CN=facefumec, OU=facefumec, O=facefumec, L=facefumec, ST=facefumec, C=FF
+Emissor: CN=facefumec, OU=facefumec, O=facefumec, L=facefumec, ST=facefumec, C=FF
+Número de série: 27c819fe
+Válido de: Sun Oct 20 17:17:35 BRST 2013 a: Sat Jan 18 17:17:35 BRST 2014
+Fingerprints do certificado:
+	 MD5:  66:49:AE:3D:50:B2:CB:E7:62:67:54:9B:20:54:0E:AA
+	 SHA1: 39:1D:4F:9E:37:DE:56:79:E6:BD:B5:70:AB:A3:AE:CA:95:C4:79:FE
+	 SHA256: F7:2B:39:5F:CE:02:88:E8:41:6E:32:CF:40:3F:2B:A9:8F:BD:04:4D:01:FC:6B:35:A6:6D:64:DF:64:AD:6D:27
+	 Nome do algoritmo de assinatura: SHA256withRSA
+	 Versão: 3
+
+Extensões: 
+
+#1: ObjectId: 2.5.29.14 Criticality=false
+SubjectKeyIdentifier [
+KeyIdentifier [
+0000: 5F 51 B3 C2 F8 25 0D 4C   84 E2 A4 58 62 F5 6A D0  _Q...%.L...Xb.j.
+0010: 1D 8C 84 60                                        ...`
+]
+]
+
+
+
+*******************************************
+*******************************************
+
+
+Nome do alias: tomcat
+Data de criação: 20/10/2013
+Tipo de entrada: PrivateKeyEntry
+Comprimento da cadeia de certificados: 1
+Certificado[1]:
+Proprietário: CN=facefumec, OU=facefumec, O=facefumec, L=facefumec, ST=facefumec, C=FF
+Emissor: CN=facefumec, OU=facefumec, O=facefumec, L=facefumec, ST=facefumec, C=FF
+Número de série: 27c819fe
+Válido de: Sun Oct 20 17:17:35 BRST 2013 a: Sat Jan 18 17:17:35 BRST 2014
+Fingerprints do certificado:
+	 MD5:  66:49:AE:3D:50:B2:CB:E7:62:67:54:9B:20:54:0E:AA
+	 SHA1: 39:1D:4F:9E:37:DE:56:79:E6:BD:B5:70:AB:A3:AE:CA:95:C4:79:FE
+	 SHA256: F7:2B:39:5F:CE:02:88:E8:41:6E:32:CF:40:3F:2B:A9:8F:BD:04:4D:01:FC:6B:35:A6:6D:64:DF:64:AD:6D:27
+	 Nome do algoritmo de assinatura: SHA256withRSA
+	 Versão: 3
+
+Extensões: 
+
+#1: ObjectId: 2.5.29.14 Criticality=false
+SubjectKeyIdentifier [
+KeyIdentifier [
+0000: 5F 51 B3 C2 F8 25 0D 4C   84 E2 A4 58 62 F5 6A D0  _Q...%.L...Xb.j.
+0010: 1D 8C 84 60                                        ...`
+]
+]
+
+
+
+*******************************************
+*******************************************
+
+
