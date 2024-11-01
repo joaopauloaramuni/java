@@ -1,0 +1,6 @@
+PUT /relatorios/testeput.txt HTTP/1.0
+Content-Type: text/plain
+Content-Length: 18
+
+teste 10
+testando
