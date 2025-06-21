@@ -20,6 +20,8 @@
 
 # Repo Java
 
-Projetos com Spring Boot: https://github.com/joaopauloaramuni/laboratorio-de-desenvolvimento-de-software
+**Os projetos deste repositório são de 2011 até 2013.**
+
+Novos projetos com Spring Boot: https://github.com/joaopauloaramuni/laboratorio-de-desenvolvimento-de-software
 
 -----
